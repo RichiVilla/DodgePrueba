@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodge Koopa - Iniciar Sesión</title>
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!-- Fuente de Super Mario -->
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('/images/background_gif.gif'); /* Ruta de tu imagen de fondo */
+            background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
+            background-position: center; /* Centra la imagen */
+            background-color: #f0f0f0; /* Color de fondo */
+            font-family: 'Press Start 2P', cursive; /* Usar fuente de Super Mario */
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: white; /* Color del título */
+            font-size: 36px; /* Tamaño de la fuente */
+            text-shadow: 2px 2px 0px black; /* Borde negro grueso */
+            animation: blink 1s infinite; /* Animación de titilado */
+        }
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1; /* Totalmente visible */
+            }
+            50% {
+                opacity: 0; /* Totalmente invisible */
+            }
+        }
+        form {
+            display: flex;
+            flex-direction: column; /* Coloca los elementos en columna */
+            align-items: center; /* Centra los elementos en el eje horizontal */
+        }
+        input, select {
+            margin: 10px 0;
+            padding: 10px;
+            width: 220px; /* Ajusta el ancho según lo necesites */
+            font-size: 16px; /* Tamaño de la fuente */
+            border: 2px solid #007bff; /* Borde del input */
+            border-radius: 5px; /* Bordes redondeados */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para el input */
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column; /* Coloca los botones en columna */
+            gap: 10px; /* Espacio entre los botones */
+            margin-top: 20px; /* Espacio arriba de los botones */
+        }
+        button {
+            padding: 15px 30px; /* Aumenta el tamaño del botón */
+            font-size: 18px; /* Tamaño de la fuente del botón */
+            color: white;
+            background-color: #28a745; /* Color verde del botón */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: 'Press Start 2P', cursive; /* Usa la fuente de Super Mario */
+        }
+        button:hover {
+            background-color: #218838; /* Color verde más oscuro al pasar el ratón */
+        }
+    </style>
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault(); // Evita el envío del formulario
+
+            const usernameInput = document.querySelector('input[type="text"]');
+            const username = usernameInput.value; // Obtiene el nombre de usuario
+            localStorage.setItem('username', username); // Guarda el nombre en localStorage
+
+            // Verifica que el nombre se haya guardado
+            console.log("Nombre de usuario guardado:", username);
+
+            const selectedOption = document.getElementById("gameOption").value;
+            if (selectedOption === "play") {
+                // Redirige a index.html si "Jugar" está seleccionado
+                window.location.href = "/game";
+            } else if (selectedOption === "join") {
+                window.location.href = "/join";
+            } else if (selectedOption === "create") {
+                window.location.href = "/create_game";
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>Iniciar Sesión</h1>
+<form onsubmit="handleSubmit(event)">
+    <input type="text" placeholder="Ingresa tu nombre" required />
+    <select id="gameOption">
+        <option value="play">Jugar</option>
+        <option value="join">Unirse</option>
+        <option value="create">Crear</option>
+    </select>
+    <div class="button-container">
+        <button type="submit">Enviar</button>
+        <button type="button" onclick="location.href='/'">Volver a la página principal</button>
+    </div>
+</form>
+</body>
+</html>
